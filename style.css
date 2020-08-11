@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 html {
   box-sizing: border-box;
@@ -10,7 +10,7 @@ body {
   overflow-y: hidden;
   display: flex;
   align-items: center;
-
+  font-family: Lato, 'Helvetica Neue';
 }
 
 /* Video Background */
@@ -42,14 +42,14 @@ video {
 .container {
   min-width: 580px;
   min-height: 304px;
-  color: black;
+  color: #2B2B2B;
   margin: 0 auto;
   padding: 25px 50px;
   border-radius: 5px;
   z-index: 2;
   display: flex;
   justify-content: center;
-
+  background-color: rgba(255, 255, 255, 0.85)
 }
 
 .input-container {
@@ -80,9 +80,9 @@ input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
-  background: #fff;
+  background: #ECF0F1;
   outline: none;
-
+  font-family: Lato, 'Helvetica Neue';
 }
 
 /* Button */
@@ -93,13 +93,15 @@ button {
   margin-top: 15px;
   border: none;
   text-transform: uppercase;
-  background: #006959;
-  color: white;
+  background: #34495E;
+  color: #ECF0F1;
   cursor: pointer;
   outline: none;
 }
 
-
+button:hover {
+  filter: brightness(110%);
+}
 
 /* Countdown */
 ul {
@@ -107,7 +109,7 @@ ul {
 }
 
 li {
-
+  display: inline-block;
   font-size: 30px;
   list-style-type: none;
   padding: 10px;
@@ -126,6 +128,33 @@ li span {
   top: 60px;
 }
 
+.complete-title {
+  animation: complete 4s infinite;
+}
+
+@keyframes complete {
+  0% {
+    color: #E84C3B;
+  }
+
+  25% {
+    color: #FFCD00;
+  }
+
+  50% {
+    color: #2FCC71;
+    transform: scale(1.5);
+  }
+
+  75% {
+    color: #3599DA;
+  }
+  
+  100%{
+    color: #9B59B6;
+  }
+}
+
 
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
@@ -141,7 +170,8 @@ li span {
   }
 
   .container {
-
+    min-width: unset;
+    width: 95vw;
     min-height: 245px;
     padding: 20px;
     margin: 10px;
