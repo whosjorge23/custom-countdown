@@ -7,6 +7,10 @@ const countdownElementTitle = document.getElementById('countdown-title')
 const countdownButton = document.getElementById('countdown-button')
 const timeElements = document.querySelectorAll('span')
 
+const completeElement = document.getElementById('complete')
+const completeElementInfo = document.getElementById('complete-info')
+const completeButton = document.getElementById('complete-button')
+
 let countdownTitle = ''
 let countdownDate = ''
 let countdownValue = Date
@@ -19,7 +23,7 @@ const day = hour * 24
 
 //Set Date Input Min With Today's Date
 const today = new Date().toISOString().split('T')[0]
-//dateElement.setAttribute('min',today)
+dateElement.setAttribute('min',today)
 
 //Populate Countdown / Complete UI
 function updateDOM() {
@@ -34,16 +38,30 @@ function updateDOM() {
         const seconds = Math.floor((distance % minute) / second)
         //console.log(days,hours,minutes,seconds)
 
-        //Populate Countdown
-        countdownElementTitle.textContent = `${countdownTitle}`
-        timeElements[0].textContent = `${days}`
-        timeElements[1].textContent = `${hours}`
-        timeElements[2].textContent = `${minutes}`
-        timeElements[3].textContent = `${seconds}`
         //Hide Input
         inputContainer.hidden = true
-        //Show Countdown
-        countdownElement. hidden = false
+
+        //If The Countdown Has Ended, Show Complete
+        if (distance < 0) {
+            countdownElement.hidden = true
+            clearInterval(countdownActive)
+            completeElementInfo.textContent = `${countdownTitle} Finished On ${countdownDate}`
+            completeElement.hidden = false
+        }else {
+        //Else Show Countdown In Progress
+            //Populate Countdown
+            countdownElementTitle.textContent = `${countdownTitle}`
+            timeElements[0].textContent = `${days}`
+            timeElements[1].textContent = `${hours}`
+            timeElements[2].textContent = `${minutes}`
+            timeElements[3].textContent = `${seconds}`
+            completeElement.hidden = true
+            //Show Countdown
+            countdownElement. hidden = false
+        }
+
+        
+        
     },second)
 }
 
@@ -69,6 +87,7 @@ function updateCountdown(e) {
 function reset() {
     //Hide Countdowns / Show Inputs
     countdownElement.hidden = true
+    completeElement.hidden = true
     inputContainer.hidden = false
     //Stop Countdown
     clearInterval(countdownActive)
@@ -80,3 +99,4 @@ function reset() {
 //Event Listener
 countdownForm.addEventListener('submit',updateCountdown)
 countdownButton.addEventListener('click',reset)
+completeButton.addEventListener('click',reset)
